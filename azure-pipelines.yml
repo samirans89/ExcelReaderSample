@@ -12,7 +12,6 @@ pool:
 
 
 steps:
-- script: cd ExcelReader
 - script: echo Hello, world! 
 
   displayName: 'Run a one-line script'
@@ -22,12 +21,11 @@ steps:
     command: 'restore'
     restoreSolution: '**/*.sln'
     feedsToUse: 'select'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'run'
     
 - script: |
     echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
+    cd ExcelReader
+    nuget restore
+    dotnet run
+
   displayName: 'Run a multi-line script'
