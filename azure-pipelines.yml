@@ -12,18 +12,8 @@ pool:
 
 
 steps:
-- script: echo Hello, world! 
-
-  displayName: 'Run a one-line script'
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '**/*.sln'
-    feedsToUse: 'select'
     
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
     nuget restore
     cd ExcelReader
     dotnet run
