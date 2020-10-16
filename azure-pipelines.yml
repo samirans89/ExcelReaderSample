@@ -24,8 +24,8 @@ steps:
     
 - script: |
     echo Add other tasks to build, test, and deploy your project.
-    cd ExcelReader
     nuget restore
+    cd ExcelReader
     dotnet run
 
   displayName: 'Run a multi-line script'
