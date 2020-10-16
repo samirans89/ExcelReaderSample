@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
-using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
@@ -44,24 +43,31 @@ namespace ExcelReader
             }
 
 
-            /*
-            var fileName = @"/Users/samiran/Projects/ExcelReader/ExcelReader/TestExcelReader.xlsx";
-            var connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;IMEX=1;HDR=NO;TypeGuessRows=0;ImportMixedTypes=Text\""; ;
-            using (var conn = new OleDbConnection(connectionString))
+            try
             {
-                conn.Open();
-
-                var sheets = conn.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
-                using (var cmd = conn.CreateCommand())
+                var fileName = @"TestExcelReader.xlsx";
+                var connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + ";Extended Properties=\"Excel 12.0;IMEX=1;HDR=NO;TypeGuessRows=0;ImportMixedTypes=Text\""; ;
+                using (var conn = new OleDbConnection(connectionString))
                 {
-                    cmd.CommandText = "SELECT * FROM [" + sheets.Rows[0]["TABLE_NAME"].ToString() + "] ";
+                    conn.Open();
 
-                    var adapter = new OleDbDataAdapter(cmd);
-                    var ds = new DataSet();
-                    adapter.Fill(ds);
+                    var sheets = conn.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = "SELECT * FROM [" + sheets.Rows[0]["TABLE_NAME"].ToString() + "] ";
+
+                        var adapter = new OleDbDataAdapter(cmd);
+                        var ds = new DataSet();
+                        adapter.Fill(ds);
+                    }
                 }
+
             }
-            */
+            catch(Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+            }
+            
         }
     }
 }
