@@ -7,27 +7,17 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  #vmImage: 'ubuntu-latest'
+  vmImage: 'vs2017-win2016'
+  
 
 
 
 steps:
-- script: cd ExcelReader
-- script: echo Hello, world! 
-
-  displayName: 'Run a one-line script'
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore'
-    restoreSolution: '**/*.sln'
-    feedsToUse: 'select'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'run'
     
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
+    nuget restore
+    cd ExcelReader
+    dotnet run
+
   displayName: 'Run a multi-line script'
